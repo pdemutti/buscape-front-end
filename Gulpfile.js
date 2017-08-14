@@ -10,10 +10,14 @@ var runTimestamp = Math.round(Date.now()/1000);
 
 
 
-// COPY CHICO ASSETS
-gulp.task('copy', function() {
-  return gulp.src(['node_modules/chico/dist/ui/**/*', 'node_modules/chico/dist/assets/**/*'])
-    .pipe(gulp.dest('./public/theme/assets'))
+gulp.task('copy-font', function() {
+  return gulp.src(['./app/font/*'])
+    .pipe(gulp.dest('./public/font'))
+})
+
+gulp.task('copy-imgs', function() {
+  return gulp.src(['./app/images/*'])
+    .pipe(gulp.dest('./public/images'))
 })
 
 gulp.task('sass', function() {
@@ -21,9 +25,9 @@ gulp.task('sass', function() {
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./public/css/'));
 });
-gulp.task('image', function() {
-      return gulp.src('./app/image/**/*')
-          .pipe(gulp.dest('./public/image'))
+gulp.task('copy-imgs', function() {
+      return gulp.src('./app/images/**/*')
+          .pipe(gulp.dest('./public/images'))
   })
 gulp.task('js', function() {
    browserify('./app/js/main.js')
@@ -32,12 +36,12 @@ gulp.task('js', function() {
      gutil.log(e);
    })
    .pipe(source('bundle.js'))
-   .pipe(gulp.dest('./public/js/dist'));
+   .pipe(gulp.dest('./public/js'));
 });
 
 gulp.task('watch', function() {
     gulp.watch('./app/scss/*.scss', ['sass'])
     gulp.watch('./app/js/*.js', ['js'])
 });
-gulp.task('build',['image', 'sass', 'js']);
+gulp.task('build',['copy-imgs','copy-font' , 'sass', 'js']);
 gulp.task('default', ['watch', 'build']);
