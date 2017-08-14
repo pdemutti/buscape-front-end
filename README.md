@@ -1,4 +1,4 @@
-# Buscape challenge
+# Buscapé challenge
 --------------------
 
 ## Prerequisites
@@ -34,6 +34,8 @@ Listening port on 3001
 http://localhost:3001/
 ```
 
+## Mobile
+> **Responsively** design using CSS media queries. Better display, emulate on iPhone 6.
 
 Endpoints Documentation
 -------------
