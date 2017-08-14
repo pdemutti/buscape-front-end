@@ -52,9 +52,10 @@ App.Challenge = {
       var hasItemsOut = document.getElementsByClassName("has-items");
       var hasItemsInside = document.getElementsByClassName("header-cart");
 
-      $('.has-items, .header-cart').find(".badge, .lock").remove();
 
       axios.get("/cart/").then(function(res) {
+        $('.has-items, .header-cart').find(".badge, .lock").remove();
+
         var quantityVal = [];
         var data = res.data.items;
         if(data.length > 0){
