@@ -1,0 +1,127 @@
+@import "variables";
+
+ul.product-list {
+  float: left;
+  padding: 2px 0 0 0;
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+
+  figure{
+    width: 40%;
+    margin: 0;
+    padding: 11px 0 0 0;
+    img{
+      display: block;
+      margin: 0 auto;
+      width: 172px;
+    }
+  }
+  hr {
+    margin: 0 auto;
+    border-top: 1px solid #e6e6e6;
+    border-bottom: none;
+  }
+  li {
+    display: flex;
+    -webkit-box-shadow: 0px 5px 14px -2px rgba(153,153,153,0.58);
+    -moz-box-shadow: 0px 5px 14px -2px rgba(153,153,153,0.58);
+    box-shadow: 0px 5px 14px -2px rgba(153,153,153,0.58);
+    margin: 4px 0 9px;
+    background-color: #fff;
+    min-height: 210px;
+    list-style: none;
+    z-index: 99;
+  }
+
+  .product-item {
+    padding: 23px 23px 0 0;
+    width: 60%;
+    .best-price {
+      display: flex;
+      width: 100%;
+      font-family: $font-family-primary;
+      overflow: hidden;
+      width: 112px;
+      position: relative;
+      height: 24px;
+      p {
+        background-color: #1990df;
+        color: #fff;
+        font-size: 9px;
+        width: 80px;
+        z-index: 9999999;
+        padding: 6px 0 6px 6px;
+        height: 16px;
+        margin: 0;
+        display: flex;
+        text-transform: uppercase;
+        align-self: end;
+      }
+      p::after {
+        content: "";
+        width: 30px;
+        height: 30px;
+        background-color: #1990df;
+        display: block;
+        -ms-transform: rotate(40deg);
+        -webkit-transform: rotate(40deg);
+        transform: rotate(40deg);
+        position: absolute;
+        right: 20px;
+        overflow: hidden;
+        z-index: -1;
+        top: -3px;
+      }
+
+    }
+  }
+  .item-title {
+
+    font-size: 22px;
+    margin-bottom: 7px;
+    font-family: $font-family-primary;
+    line-height: 1.3em;
+    color: #47464A;
+    text-align: left;
+    display: flex;
+
+    p {
+      display: flex;
+      margin: 0;
+    }
+
+    i {
+      width: 20px;
+      display: flex;
+      height: 20px;
+      padding: 4px 0 0 7px;
+      margin: 0;
+      align-self: center;
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+  .wrap-hr {
+    padding-top: 5px;
+    padding-bottom: 8px;
+  }
+  .item-price, .item-installment, .wrap-hr{
+    text-align: center;
+    float: left;
+    width: 100%;
+  }
+  .item-installment {
+    color: #A6A6A6;
+    font-family: $font-family-primary;
+    font-size: 12px;
+  }
+  .item-price b {
+    font-size: 26px;
+    font-family: OpenSans-Bold;
+  }
+}

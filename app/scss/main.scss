@@ -1,0 +1,11 @@
+@import "variables";
+@import "font";
+@import "cart";
+@import "product-list";
+@import "buy-box";
+@import "header";
+
+body {
+  background-color: $main-bg-color;
+  padding: 0;
+}

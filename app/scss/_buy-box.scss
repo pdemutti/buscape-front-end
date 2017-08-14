@@ -1,0 +1,125 @@
+
+
+.buy-box {
+  font-family: $font-family-primary;
+  display: flex;
+  width: 100%;
+  order: 3;
+  .add-bt {
+    background-color: #55AF55;
+    border: solid 1px #55AF55;
+    color: #fff;
+    width: 169px;
+    height: 34px;
+    font-size: 12px;
+    font-family: $font-family-primary;
+    color: $text-color-quaternary;
+    margin: 0;
+    display: flex;
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 8px;
+      height: 8px;
+      font-size: 25px;
+      padding: 2px 0 0 9px;
+    }
+  }
+  .price-options {
+    width: 70%;
+    .item-installment {
+      color: #55AF55;
+      font-family: $font-family-primary;
+      font-size: 26px;
+      width: 100%;
+      font-weight: bold;
+      align-self: flex-start;
+      display: flex;
+    }
+    .how-many {
+      font-size: 18px;
+      margin-right: 11px;
+      display: flex;
+      padding-bottom: 3px;
+      align-self: flex-end;
+      height: 21px;
+    }
+    .installment-value {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 34px;
+      font-family: $font-family-primary;
+    }
+  }
+  .price-value {
+    color: #55AF55;
+    font-weight: bold;
+  }
+  .title {
+    font-weight: 400;
+    font-size: 26px;
+    width: 90%;
+    line-height: 1.05;
+  }
+
+  .price {
+    overflow: visible;
+    display: inline-block;
+    vertical-align: text-bottom;
+    line-height: 1em;
+    font-size: 44px;
+    font-weight: 300;
+    width: 90%;
+  }
+  .free-shipping {
+    color: #468847;
+    overflow: auto;
+    height: 19px;
+    display: flex;
+    span {
+      color: #468847;
+      font-size: 16px;
+      margin: 0 7px 0 0;
+    }
+  }
+  .ch-btn {
+    width: 90%;
+    height: 40px;
+    align-self: left;
+    margin-top: 30px;
+  }
+  .ch-icon-star {
+    color: #eee;
+  }
+  .full-price {
+    color: $text-color-primary;
+  }
+}
+@media all and (max-width: 375px) {
+  .buy-box {
+    width: 100%;
+    hr {
+      border-bottom: 1px dashed #d9d9d9;
+      width: 100%;
+      margin-top: 30px;
+    }
+    .title {
+      font-size: 19px;
+    }
+    .title, .price {
+      align-self: center;
+    }
+    .ch-btn {
+      align-self: center;
+      margin-top: 15px;
+    }
+    .rate {
+      margin-left: 14px;
+    }
+    .free-shipping {
+      margin-left: 18px;
+    }
+  }
+}
