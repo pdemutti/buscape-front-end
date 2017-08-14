@@ -6,8 +6,8 @@ App.Challenge = {
       App.Challenge.getData("/products");
       App.Challenge.getCartList();
       App.Challenge.bindItem();
+      // App.Challenge.showCart();
       App.Challenge.updateLockIcon();
-      App.Challenge.hiddenCart();
     },
     getData: function(url){
       axios.get(url).then(function(res) {
@@ -26,13 +26,9 @@ App.Challenge = {
             var installments = priceObj.installments;
             var installmentValue = priceObj.installmentValue;
             var images = fullItem.images[0];
-            // var priceBig = fullItem.price.toString().split(".")[0];
-            // var priceDecimal = fullItem.price.toString().split(".")[1];
-              // for (var img in images){
-              //   html += "<li><img src="+images+" alt='' /></li>";
-              // }
+
             html += "<li class='item' data-id='"+idItem+"'>";
-              html += "<figure><img src="+images+" alt='' /></figure>";
+              html += "<figure><img src="+images+" title="+name+" /></figure>";
               html += "<div class='product-item'>";
               html += "<span class='item-title'><p>" + name + "</p></span>";
               html += "<span class='wrap-hr'><hr></span>";
@@ -50,6 +46,7 @@ App.Challenge = {
         html +=  "</ul>";
         $('.store').append(html);
         App.Challenge.bindItem();
+        App.Challenge.bindTgBt();
     },
     updateLockIcon: function(){
       var hasItemsOut = document.getElementsByClassName("has-items");
@@ -58,9 +55,9 @@ App.Challenge = {
       $('.has-items, .header-cart').find(".badge, .lock").remove();
 
       axios.get("/cart/").then(function(res) {
-         var quantityVal = [];
+        var quantityVal = [];
         var data = res.data.items;
-        if(data){
+        if(data.length > 0){
           for (var prop in data) {
             quantityVal.push(data[prop].quantity);
           }
@@ -74,15 +71,13 @@ App.Challenge = {
             if(sum > 0){
               $(hasItemsOut).append(html);
               $(hasItemsInside).append(html);
-              $('body').find(".has-items").click(function(){
-                App.Challenge.showCart();
-              });
             }
           }
+          App.Challenge.bindTgBt();
         }
         else {
           var cart = $('#cart-list');
-          cart.animate({"right":"-700"}, "fast").removeClass('visible');
+          cart.animate({"top":"-700"}, "fast").removeClass('visible').addClass('visible');
          }
 
       });
@@ -91,44 +86,42 @@ App.Challenge = {
       $('.product-list .add-bt').click(function(event){
          var id = this.getAttribute("data-id").toString();
           App.Challenge.addItemToCart(id);
-          App.Challenge.showCart();
+      });
+    },
+    bindTgBt: function () {
+      var hasItemICon = $('.has-items');
+      hasItemICon.unbind().click(function(event){
+        var cart = $('#cart-list');
+        cart.slideToggle("fast").toggleClass('visible');
       });
     },
     showCart: function(){
-      // var cart = $('#cart-list');
-      // debugger
-      //
-      //  if (cart.style.display === 'none') {
-      //     //  cart.style.display = 'block';
-      //     //  cart.animate({"top":"65px"}, "fast").addClass('visible');
-      //  } else {
-      //      cart.style.display = 'none';
-      //     //  cart.animate({"top":"65px"}, "fast").addClass('visible');
-      //
-      //  }
       var cart = $('#cart-list');
-      cart.animate({"top":"65px"}, "fast").addClass('visible');
-    },
-    hiddenCart: function(){
-      var cart = $('#cart-list');
-      $('.toogle-cart').click(function(){
-        cart.animate({"top":"-675px"}, "fast").toggleClass('visible');
-      })
+      cart.animate({"top":"65px"}, "fast").toggleClass('visible');
+      App.Challenge.bindTgBt();
     },
     addItemToCart: function(id){
       axios.get("/cart/add/"+id).then(function(res) {
         App.Challenge.buildCartItemMrkp(res);
         App.Challenge.updateLockIcon();
+        App.Challenge.showCart();
       });
     },
     getCartList: function(){
       axios.get("/cart/").then(function(res) {
         App.Challenge.buildCartItemMrkp(res);
+        // debugger
+        if(res.data.items.length > 0){
+          App.Challenge.showCart();
+        }
+
       });
     },
     buildCartItemMrkp: function(res){
       var cartList = document.getElementById("cart");
       cartList.innerHTML = '';
+
+      var sumcart = [];
 
       var items = res.data.items;
       for (var key in items){
@@ -140,32 +133,50 @@ App.Challenge = {
             installments = singleItem.installments,
             qtd = singleItem.quantity,
             installmentsValue = singleItem.installmentsValue;
+            sumcart.push(price * qtd);
 
 
-
-        var html = "<li>";
-          html += "<figure class='thumb'><img src="+image+" /></figure>";
-          html += "<div class='details'>";
-            html += "<span class='cart-item-title'>"+name+"</span>";
-            html += "<div class='price-details'>";
-              html += "<span class='cart-item-installments'>"+installments+"x de "+installmentsValue+"</span>";
-              html += "<span class='cart-item-price'>Ou "+price+" à vista</span>";
-              html += "<span class='cart-item-qtd'>Quantidade: "+qtd+"</span>";
+          var html = "<li>";
+            html += "<figure class='thumb'><img src="+image+" title="+name+" /></figure>";
+            html += "<div class='details'>";
+              html += "<span class='cart-item-title'>"+name+"</span>";
+              html += "<div class='price-details'>";
+                html += "<span class='cart-item-installments'>"+installments+"x de "+installmentsValue+"</span>";
+                html += "<span class='cart-item-price'>Ou "+price+" à vista</span>";
+                html += "<span class='cart-item-qtd'>Quantidade: "+qtd+"</span>";
+              html += "</div>"
             html += "</div>"
-          html += "</div>"
-          html += "<div class='action-area'>";
-            html += "<span class='remove-bt' onclick='App.Challenge.removeCartItem("+id+")'>X</span>";
-          html += "</div>";
-        html += "</li>";
+            html += "<div class='action-area'>";
+              html += "<span class='remove-bt' onclick='App.Challenge.removeCartItem("+id+")'>X</span>";
+            html += "</div>";
+          html += "</li>";
 
         $('#cart-list ul').append(html);
       }
+
+      App.Challenge.buildSubtotal(sumcart);
+    },
+    buildSubtotal: function(sumcart){
+      var subtotal = $('#cart-list .subtotal')[0];
+      subtotal.innerHTML = '';
+      var sum = sumcart.reduce(add, 0);
+
+      function add(a, b) {
+        return a + b;
+      }
+      var installmentTotal = Math.round(sum/10).toFixed(2);
+
+      html = "<div>Subtotal</div><hr>";
+      html += "<div>10x de "+ installmentTotal +"</div>";
+      html += "<div>ou R$ "+Math.round(sum).toFixed(2);+" à vista</div>";
+      $('#cart-list .subtotal').append(html);
     },
     removeCartItem: function(id){
       axios.get("/cart/remove/" + id).then(function(res) {
        App.Challenge.buildCartItemMrkp(res);
        App.Challenge.getCartList();
        App.Challenge.updateLockIcon();
+       App.Challenge.showCart();
      });
     }
 };

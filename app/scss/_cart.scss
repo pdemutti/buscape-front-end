@@ -1,3 +1,15 @@
+@media all and (max-width: 375px) {
+  #cart-list {
+    width: 100%;
+    top: 65px;
+    display: flex;
+    flex-direction: column;
+    .cart-item-title {
+      font-size: 12px;
+    }
+  }
+}
+
 #cart-list {
   float: right;
   width: 100%;
@@ -109,7 +121,6 @@
   line-height: 1em;
   order: 1;
   .cart-item-title {
-    width: 390px;
     line-height: 1.2em;
     margin-bottom: 10px;
   }
@@ -155,10 +166,6 @@
 
 @keyframes slide {
     100% { left: 0; }
-}
-.store{
-  margin: 0 auto;
-  width: 60%;
 }
 
 .hidden {

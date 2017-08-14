@@ -97,29 +97,35 @@
     color: $text-color-primary;
   }
 }
+
 @media all and (max-width: 375px) {
   .buy-box {
-    width: 100%;
-    hr {
-      border-bottom: 1px dashed #d9d9d9;
+    flex-direction: column;
+    .add-bt {
       width: 100%;
-      margin-top: 30px;
+      display: block;
+      font-size: 12px;
+      height: 27px;
+      span {
+        display: none;
+      }
     }
-    .title {
-      font-size: 19px;
+    .price-options {
+      width: 100%;
+      height: 44px;
+      .installment-value {
+        height: 23px;
+        font-size: 22px;
+      }
+      .how-many {
+        padding-bottom: 0;
+        font-size: 14px;
+        margin-right: 3px;
+      }
     }
-    .title, .price {
-      align-self: center;
-    }
-    .ch-btn {
-      align-self: center;
-      margin-top: 15px;
-    }
-    .rate {
-      margin-left: 14px;
-    }
-    .free-shipping {
-      margin-left: 18px;
+    .full-price {
+      margin-bottom: 12px;
+      line-height: .9em;
     }
   }
 }

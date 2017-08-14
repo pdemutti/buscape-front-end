@@ -1,5 +1,13 @@
 @import "variables";
 
+.remove-bt {
+  color: #000;
+  cursor: pointer;
+}
+.store {
+  margin: 0 auto;
+  width: 60%;
+}
 ul.product-list {
   float: left;
   padding: 2px 0 0 0;
@@ -35,6 +43,15 @@ ul.product-list {
     list-style: none;
     z-index: 99;
   }
+  @media all and (max-width: 375px) {
+
+    .item{
+      min-height: 184px;
+      img {
+        width: 100px;
+      }
+    }
+  }
 
   .product-item {
     padding: 23px 23px 0 0;
@@ -66,20 +83,39 @@ ul.product-list {
         height: 30px;
         background-color: #1990df;
         display: block;
-        -ms-transform: rotate(40deg);
-        -webkit-transform: rotate(40deg);
-        transform: rotate(40deg);
+        -ms-transform: rotate(46deg);
+        -webkit-transform: rotate(46deg);
+        transform: rotate(46deg);
         position: absolute;
         right: 20px;
         overflow: hidden;
         z-index: -1;
         top: -3px;
       }
-
+    }
+    @media all and (max-width: 375px) {
+      .best-price {
+        display: flex;
+        width: 100%;
+        font-family: $font-family-primary;
+        overflow: hidden;
+        width: 112px;
+        position: relative;
+        height: 14px;
+        p {
+          background-color: #fff;
+          color: #1990df;
+          padding: 0;
+          font-weight: bold;
+        }
+        p::after {
+          content: "";
+          background-color: #fff;
+        }
+      }
     }
   }
   .item-title {
-
     font-size: 22px;
     margin-bottom: 7px;
     font-family: $font-family-primary;
@@ -106,6 +142,16 @@ ul.product-list {
       }
     }
   }
+  @media all and (max-width: 375px) {
+    .product-item {
+      padding: 13px 13px 0 0;
+      width: 70%;
+    }
+    .item-title {
+      font-size: 13px;
+      margin-bottom: 0px;
+    }
+  }
   .wrap-hr {
     padding-top: 5px;
     padding-bottom: 8px;
@@ -124,4 +170,45 @@ ul.product-list {
     font-size: 26px;
     font-family: OpenSans-Bold;
   }
+}
+@media all and (max-width: 375px) {
+
+  .store{
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+/*
+This is the visible area of you carousel.
+Set a width here to define how much items are visible.
+The width can be either fixed in px or flexible in %.
+Position must be relative!
+*/
+.jcarousel {
+    position: relative;
+    overflow: hidden;
+}
+
+/*
+This is the container of the carousel items.
+You must ensure that the position is relative or absolute and
+that the width is big enough to contain all items.
+*/
+.jcarousel ul {
+    width: 20000em;
+    position: relative;
+
+    /* Optional, required in this case since it's a <ul> element */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+These are the item elements. jCarousel works best, if the items
+have a fixed width and height (but it's not required).
+*/
+.jcarousel li {
+    /* Required only for block elements like <li>'s */
+    float: left;
 }

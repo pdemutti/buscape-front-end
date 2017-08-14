@@ -7,6 +7,15 @@
   src: local("Montserrat Regular"), local("Montserrat-Regular"), url("../font/montserrat-v10-latin-regular.eot?#iefix") format("embedded-opentype"), url("../font/montserrat-v10-latin-regular.woff2") format("woff2"), url("../font/montserrat-v10-latin-regular.woff") format("woff"), url("../font/montserrat-v10-latin-regular.ttf") format("truetype"), url("../font/montserrat-v10-latin-regular.svg#Montserrat") format("svg");
   /* Legacy iOS */ }
 
+@media all and (max-width: 375px) {
+  #cart-list {
+    width: 100%;
+    top: 65px;
+    display: flex;
+    flex-direction: column; }
+    #cart-list .cart-item-title {
+      font-size: 12px; } }
+
 #cart-list {
   float: right;
   width: 100%;
@@ -102,7 +111,6 @@
   line-height: 1em;
   order: 1; }
   .details .cart-item-title {
-    width: 390px;
     line-height: 1.2em;
     margin-bottom: 10px; }
 
@@ -147,10 +155,6 @@
   100% {
     left: 0; } }
 
-.store {
-  margin: 0 auto;
-  width: 60%; }
-
 .hidden {
   z-index: 2;
   position: absolute;
@@ -159,6 +163,14 @@
 
 a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer {
   cursor: pointer; }
+
+.remove-bt {
+  color: #000;
+  cursor: pointer; }
+
+.store {
+  margin: 0 auto;
+  width: 60%; }
 
 ul.product-list {
   float: left;
@@ -190,6 +202,11 @@ ul.product-list {
     min-height: 210px;
     list-style: none;
     z-index: 99; }
+  @media all and (max-width: 375px) {
+    ul.product-list .item {
+      min-height: 184px; }
+      ul.product-list .item img {
+        width: 100px; } }
   ul.product-list .product-item {
     padding: 23px 23px 0 0;
     width: 60%; }
@@ -219,14 +236,31 @@ ul.product-list {
         height: 30px;
         background-color: #1990df;
         display: block;
-        -ms-transform: rotate(40deg);
-        -webkit-transform: rotate(40deg);
-        transform: rotate(40deg);
+        -ms-transform: rotate(46deg);
+        -webkit-transform: rotate(46deg);
+        transform: rotate(46deg);
         position: absolute;
         right: 20px;
         overflow: hidden;
         z-index: -1;
         top: -3px; }
+    @media all and (max-width: 375px) {
+      ul.product-list .product-item .best-price {
+        display: flex;
+        width: 100%;
+        font-family: Montserrat, Proxima Nova, Helvetica Neue, Roboto, Helvetica, Arial, sans-serif;
+        overflow: hidden;
+        width: 112px;
+        position: relative;
+        height: 14px; }
+        ul.product-list .product-item .best-price p {
+          background-color: #fff;
+          color: #1990df;
+          padding: 0;
+          font-weight: bold; }
+        ul.product-list .product-item .best-price p::after {
+          content: "";
+          background-color: #fff; } }
   ul.product-list .item-title {
     font-size: 22px;
     margin-bottom: 7px;
@@ -248,6 +282,13 @@ ul.product-list {
       ul.product-list .item-title i img {
         width: 20px;
         height: 20px; }
+  @media all and (max-width: 375px) {
+    ul.product-list .product-item {
+      padding: 13px 13px 0 0;
+      width: 70%; }
+    ul.product-list .item-title {
+      font-size: 13px;
+      margin-bottom: 0px; } }
   ul.product-list .wrap-hr {
     padding-top: 5px;
     padding-bottom: 8px; }
@@ -262,6 +303,42 @@ ul.product-list {
   ul.product-list .item-price b {
     font-size: 26px;
     font-family: OpenSans-Bold; }
+
+@media all and (max-width: 375px) {
+  .store {
+    margin: 0 auto;
+    width: 100%; } }
+
+/*
+This is the visible area of you carousel.
+Set a width here to define how much items are visible.
+The width can be either fixed in px or flexible in %.
+Position must be relative!
+*/
+.jcarousel {
+  position: relative;
+  overflow: hidden; }
+
+/*
+This is the container of the carousel items.
+You must ensure that the position is relative or absolute and
+that the width is big enough to contain all items.
+*/
+.jcarousel ul {
+  width: 20000em;
+  position: relative;
+  /* Optional, required in this case since it's a <ul> element */
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+/*
+These are the item elements. jCarousel works best, if the items
+have a fixed width and height (but it's not required).
+*/
+.jcarousel li {
+  /* Required only for block elements like <li>'s */
+  float: left; }
 
 .buy-box {
   font-family: Montserrat, Proxima Nova, Helvetica Neue, Roboto, Helvetica, Arial, sans-serif;
@@ -347,22 +424,27 @@ ul.product-list {
 
 @media all and (max-width: 375px) {
   .buy-box {
-    width: 100%; }
-    .buy-box hr {
-      border-bottom: 1px dashed #d9d9d9;
+    flex-direction: column; }
+    .buy-box .add-bt {
       width: 100%;
-      margin-top: 30px; }
-    .buy-box .title {
-      font-size: 19px; }
-    .buy-box .title, .buy-box .price {
-      align-self: center; }
-    .buy-box .ch-btn {
-      align-self: center;
-      margin-top: 15px; }
-    .buy-box .rate {
-      margin-left: 14px; }
-    .buy-box .free-shipping {
-      margin-left: 18px; } }
+      display: block;
+      font-size: 12px;
+      height: 27px; }
+      .buy-box .add-bt span {
+        display: none; }
+    .buy-box .price-options {
+      width: 100%;
+      height: 44px; }
+      .buy-box .price-options .installment-value {
+        height: 23px;
+        font-size: 22px; }
+      .buy-box .price-options .how-many {
+        padding-bottom: 0;
+        font-size: 14px;
+        margin-right: 3px; }
+    .buy-box .full-price {
+      margin-bottom: 12px;
+      line-height: .9em; } }
 
 .header-bp {
   box-shadow: inset 0 -9px 20px -10px #544406;
